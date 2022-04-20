@@ -1,0 +1,46 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: #000;
+}
+
+.container-gallery {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 10px 50px 50px 50px;
+    justify-content: center;
+    padding: 10px;
+}
+
+.movie-card{
+    display: flex;
+    flex-direction: row;
+    flex-basis: 50%;
+    background: #0c0c0c;
+    color: #f5c518;
+    margin: 15px;
+    padding: 0;
+    width: 480px;
+}
+
+.card-info{
+    display: block;
+    padding: 5px 20px;
+}
+
+.card-info a{
+    text-decoration: none;
+    color: white;
+    font-size: 28px;
+}
+
+.movie-details a{
+    font-size: 32px;
+    letter-spacing: 1px;
+    color: #f5c518;
+}
+
+
+.card-img {
+    width: 180px;
+}

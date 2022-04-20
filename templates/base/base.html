@@ -1,0 +1,37 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/main.css'%}">
+
+    {% block scripts %}
+    {% endblock %}
+
+    <title>Movies</title>
+</head>
+<body>
+<nav class="nav-bar">
+    <div>
+        <a href="{% url 'index' %}">Home</a>
+        <a href="{% url 'movies gallery' %}">Movies</a>
+        <a href="">Search</a>
+    </div>
+    <div>
+        {% if not request.user.is_authenticated %}
+            <a href="{% url 'register' %}">Register</a>
+            <a href="{% url 'login' %}">Login</a>
+        {% else %}
+            <a href="{% url 'create movie' %}">Add Movie</a>
+            <a href="{% url 'profile' %}">Profile</a>
+            <a href="{% url 'logout' %}">Logout</a>
+        {% endif %}
+    </div>
+</nav>
+
+    {% block content %}
+    {% endblock %}
+
+</body>
+</html>
