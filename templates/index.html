@@ -1,5 +1,18 @@
 {% extends 'base/base.html' %}
+{% load static %}
+
+{% block scripts %}
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+{% endblock %}
 
 {% block content %}
-    <h1>Hello, {{ request.user }}</h1>
+    <section class="wallpaper">
+        <img src="{% static 'img/home.jpg' %}" alt="">
+        <div class="index-message">
+            <h1>Hello, {{ request.user }}</h1>
+            <p>Nice to see you!</p>
+        </div>
+
+    </section>
+
 {% endblock %}

@@ -14,6 +14,7 @@ def profile_details(request):
     context = {
         'user': user,
         'movies': movies,
+        'message': 'Nothing to show! Add you first movie',
     }
     return render(request, 'accounts/profile.html', context)
 

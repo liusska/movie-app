@@ -1,0 +1,27 @@
+.wallpaper img {
+    display: block;
+    width: 800px;
+    height: 100%;
+    margin: 80px auto 10px auto;
+    object-fit: cover;
+
+}
+
+section {
+    position: relative;
+    margin-top: 70px;
+    z-index: -1;
+}
+
+.index-message {
+    position: absolute;
+    left: 300px;
+    top: 100px;
+}
+.index-message{
+    color: #f5c518;
+    margin-left: 200px;
+    margin-top: 100px;
+    letter-spacing: 2px;
+    font-size: 26px;
+}

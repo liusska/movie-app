@@ -1,14 +1,35 @@
 {% extends 'base/base.html' %}
+{% load static %}
+
+{% block scripts %}
+    <link rel="stylesheet" href="{% static 'css/gallery.css' %}">
+{% endblock %}
 
 {% block content %}
+    <div class="hello-message">
+        <h1>hello, {{ user }} :)</h1>
+    </div>
 
-    <h1>Hello, {{ user }}</h1>
+    <ul class="container-gallery">
+        {% if movies %}
+            {% for movie in movies %}
+                <li class="movie-card">
+                    <img class="card-img" src="{{ movie.image }}" alt="movie image">
+                    <div class="card-info">
+                        <p class="movie-details"><a href="{% url 'details movie' movie.pk %}">{{ movie.movie_title }}</a>&nbsp;&nbsp;({{ movie.year}})</p>
+                        <p>{{ movie.category }}</p>
+                        <a href="{{ movie.trailer }}" target="_blank"><i class="fas fa-play-circle"></i></a>
+                    </div>
 
-    {% for movie in movies %}
-        <div>
-            {{ movie.movie_title }}
-            <img src="{{ movie.image }}" alt="">
-        </div>
-    {% endfor %}
+                </li>
+            {% endfor %}
+        {% else %}
+            <p class="hello-message">{{ message }}
+                    <i><a href="{% url 'create movie' %}">here</a></i>
+            </p>
+        {% endif %}
+
+    </ul>
+
 
 {% endblock %}

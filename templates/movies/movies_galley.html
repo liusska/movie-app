@@ -12,9 +12,12 @@
 
         {% for movie in movies %}
             <li class="movie-card">
-                <img class="card-img" src="{{ movie.image }}" alt="movie image">
+                <img class="card-img" src="{{ movie.image }}" alt="movie image"
+                     onclick="window.open(src, '_blank');">
                 <div class="card-info">
-                    <p class="movie-details"><a href="">{{ movie.movie_title }}</a></p>
+                    <p class="movie-details">
+                        <a href="{% url 'details movie' movie.pk %}">{{ movie.movie_title }}</a>&nbsp;&nbsp;
+                        ({{ movie.year}})</p>
                     <p>{{ movie.category }}</p>
                     <a href="{{ movie.trailer }}" target="_blank"><i class="fas fa-play-circle"></i></a>
                 </div>

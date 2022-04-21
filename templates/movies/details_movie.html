@@ -1,0 +1,38 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block scripts %}
+    <link rel="stylesheet" href="{% static 'css/details.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="movie-details-container">
+        <div class="movie-details-img">
+            <img src="{{ movie.image }}" alt="movie image">
+        </div>
+        <div class="movie-details-info">
+            <h1>{{ movie.movie_title }}</h1>
+            <p class="date">{{ movie.publication_date }}</p>
+            <p class="movie-rating">Rate: {{ movie.rating_set.count }}</p>
+            <p>Category:&nbsp;&nbsp;{{ movie.category }}</p>
+            <p>Year:&nbsp;&nbsp;{{ movie.year }}</p>
+            <p>Actors:&nbsp;&nbsp;{{ movie.actors }}</p>
+
+            <p>{{ movie.user }}</p>
+            {% if is_owner %}
+                <div class="owner-actions">
+                    <a href="{% url 'edit movie' movie.id %}" class="btn">Edit</a>
+                    <a href="{% url 'delete movie' movie.id %}" class="btn">Delete</a>
+                </div>
+            {% endif %}
+
+        </div>
+    </div>
+
+    <div class="trailer-box">
+        <iframe width="760" height="450" src="https://www.youtube.com/embed/{{ trailer_id }}"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen></iframe>
+    </div>
+
+{% endblock %}

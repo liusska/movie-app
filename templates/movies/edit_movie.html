@@ -7,11 +7,11 @@
 
 {% block content %}
     <div class="form-container">
-    <h1>ADD MOVIE</h1>
-        <form action="{% url  'create movie' %}" method="post">
+    <h1>EDIT MOVIE</h1>
+        <form action="{% url  'edit movie' movie.id %}" method="post">
         {{ form }}
         {% csrf_token %}
-        <button>Create</button>
+        <button>Edit</button>
     </form>
     </div>
 

@@ -1,0 +1,32 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block scripts %}
+    <link rel="stylesheet" href="{% static 'css/delete.css' %}">
+{% endblock %}
+
+{% block content %}
+    <div class="delete-section">
+        <h1 class="hello-message">Are you sure you want to delete "{{ movie.movie_title }}?"</h1>
+
+        <div class="movie-card">
+            <img class="card-img" src="{{ movie.image }}" alt="movie image"
+                 onclick="window.open(src, '_blank');">
+            <div class="card-info">
+                <p class="movie-details">
+                    <a href="{% url 'details movie' movie.pk %}">{{ movie.movie_title }}</a>&nbsp;&nbsp;
+                    ({{ movie.year }})</p>
+                <p>{{ movie.category }}</p>
+                <a href="{{ movie.trailer }}" target="_blank"><i class="fas fa-play-circle"></i></a>
+            </div>
+        </div>
+
+        <div class="confirm-actions">
+            <form method="post">
+                {% csrf_token %}
+                <input class="btn" type="submit" value="Confirm"/>
+                <a class="btn-link" href="javascript:history.back()">No, go back</a>
+            </form>
+        </div>
+
+{% endblock %}

@@ -1,24 +1,10 @@
-body {
-    margin: 0;
-    padding: 0;
-    background: #000;
-}
-
-.container-gallery {
-    display: flex;
-    flex-wrap: wrap;
-    margin: 70px 50px 50px 50px;
-    justify-content: center;
-    padding: 10px;
-}
-
 .movie-card{
     display: flex;
     flex-direction: row;
     flex-basis: 50%;
     background: #0c0c0c;
     color: #f5c518;
-    margin: 15px;
+    margin: 60px auto;
     padding: 0;
     width: 480px;
 }
@@ -56,15 +42,25 @@ img.card-img:hover{
     margin-top: 100px;
 }
 
-
-.hello-message a{
-    display: inline-block;
-    background: #f5c518;
-    color: white;
-    text-decoration: none;
+.confirm-actions {
     text-align: center;
-    font-size: 32px;
-    border: 2px solid white;
-    width: 160px;
-    border-radius: 3px;
+    margin: 20px auto;
+}
+
+.btn {
+    border: 1px solid  #f5c518;
+    font-size: 20px;
+    padding: 4px;
+    border-radius: 4px;
+    background: #f5c518;
+    margin-right: 10px;
+}
+
+.btn-link {
+    text-decoration: none;
+    color: white;
+    border: 1px solid #f5c518;
+    border-radius: 8px;
+    font-size: 20px;
+    padding: 0 8px;
 }

@@ -1,11 +1,20 @@
 {% extends 'base/base.html' %}
+{% load static %}
+
+{% block scripts %}
+    <link rel="stylesheet" href="{% static 'css/forms.css' %}">
+{% endblock %}
 
 {% block content %}
 
-    <form action="{% url 'register' %}" method="post">
-        {{ form }}
-        {% csrf_token %}
-        <button>Register</button>
-    </form>
+        <div class="form-container">
+            <h1>Register Form</h1>
+            <form action="{% url 'register' %}" method="post">
+                {{ form }}
+                {% csrf_token %}
+                <button>Register</button>
+                <p class="extra-form-msg">* If you already have profile, login <a href="{% url 'login' %}">here</a>.</p>
+            </form>
+        </div>
 
 {% endblock %}
