@@ -12,13 +12,32 @@
         </div>
         <div class="movie-details-info">
             <h1>{{ movie.movie_title }}</h1>
+            <div class="rate-container">
+                {% if is_rated_by_user %}
+                    <p class="rate-box"><i class="fas fa-star" style="color: #f5c518"></i>&nbsp;{{ avg_rating }}
+                        <span>&nbsp;&nbsp;({{ rating_count }} votes)</span></p>
+                {% else %}
+                    <p class="rate-box"><i class="far fa-star" style="color: #f5c518"></i>&nbsp;{{ avg_rating }}
+                    <span>&nbsp;&nbsp;({{ rating_count }} votes)</span></p>
+                {% endif %}
+
+            </div>
             <p class="date">{{ movie.publication_date }}</p>
-            <p class="movie-rating">Rate: {{ movie.rating_set.count }}</p>
+
+            {% if not is_rated_by_user %}
+                <form method="post" action="{% url 'rate movie' movie.id %}">
+                    {{ form }}
+                    {% csrf_token %}
+                    <button class="rate-btn">Rate</button>
+                </form>
+            {% endif %}
+
+
             <p>Category:&nbsp;&nbsp;{{ movie.category }}</p>
             <p>Year:&nbsp;&nbsp;{{ movie.year }}</p>
             <p>Actors:&nbsp;&nbsp;{{ movie.actors }}</p>
 
-            <p>{{ movie.user }}</p>
+            <p>Author: <i>{{ movie.user }}</i></p>
             {% if is_owner %}
                 <div class="owner-actions">
                     <a href="{% url 'edit movie' movie.id %}" class="btn">Edit</a>

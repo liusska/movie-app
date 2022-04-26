@@ -16,7 +16,7 @@
     <div>
         <a href="{% url 'index' %}">Home</a>
         <a href="{% url 'movies gallery' %}">Movies</a>
-        <a href="">Search</a>
+        <a href="{% url 'search movie' %}">Search</a>
     </div>
     <div>
         {% if not request.user.is_authenticated %}

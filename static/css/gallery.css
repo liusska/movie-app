@@ -40,6 +40,10 @@ body {
     color: #f5c518;
 }
 
+.movie-details a:hover{
+    font-weight: bold;
+}
+
 
 .card-img {
     width: 180px;

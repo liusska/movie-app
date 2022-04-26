@@ -20,6 +20,10 @@ body {
     width: 100%;
 }
 
+.movie-details-info h1{
+    margin-bottom: 0;
+}
+
 .movie-details-info p{
     font-size: 22px;
     letter-spacing: 1px;
@@ -71,4 +75,21 @@ body {
 
 .trailer-box iframe{
     border: 1px solid yellow;
+}
+
+.rate-btn{
+    background: #f5c518;
+    border-radius: 3px;
+    border-color: #f5c518;
+}
+
+.rate-container {
+    display: flex;
+}
+
+.rate-container span{
+    font-size: 16px;
+}
+.rate-box{
+    margin: 0;
 }

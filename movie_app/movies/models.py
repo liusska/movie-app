@@ -116,3 +116,6 @@ class Rating(models.Model):
         default=0,
         choices=RATE_CHOICES,
     )
+
+    def __str__(self):
+        return f'{self.movie} - {self.user} Rate: {self.rate}'
