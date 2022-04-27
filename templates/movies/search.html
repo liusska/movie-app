@@ -1,2 +1,48 @@
 {% extends 'base/base.html' %}
+{% load static %}
 
+{% block scripts %}
+    <link rel="stylesheet" href="{% static 'css/search.css' %}">
+{% endblock %}
+
+{% block content %}
+
+    <form class="search-fields" action="{% url 'search movie' %}" method="post">
+        {% csrf_token %}
+        <p>
+            Title:<input type="text" name="title" placeholder="title"/>
+        </p>
+        <p>
+            Category:<input type="text" name="category" placeholder="category"/>
+        </p>
+        <p>
+            Actors:<input type="text" name="actors" placeholder="actors"/>
+        </p>
+
+            <button>Search</button>
+
+    </form>
+        {% if movies %}
+    <table class="movies-table">
+        <tr>
+            <th>Title</th>
+            <th>Category</th>
+            <th>Actors</th>
+        </tr>
+
+        {% for movie in movies %}
+            <tr>
+                <td>{{ movie.movie_title }}</td>
+                <td>{{ movie.category }}</td>
+                <td>{{ movie.actors}}</td>
+                <td><a href="{% url 'details movie' movie.pk %}">View details -></a></td>
+            </tr>
+        {% endfor %}
+
+    </table>
+        {% else %}
+             <p class="search-message">  'No results' </p>
+
+    {% endif %}
+
+{% endblock %}

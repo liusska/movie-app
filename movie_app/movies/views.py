@@ -19,10 +19,6 @@ def details_movie(request, pk):
     trailer_id = movie.trailer.split('/')[-1].split('=')[-1]
     is_owner = movie.user == request.user
     is_rated_by_user = movie.rating_set.filter(user_id=request.user.id).exists()
-    if movie.rating_set.count() == 0:
-        rating_count = 1
-    else:
-        rating_count = movie.rating_set.count()
 
     context = {
         'movie': movie,
@@ -34,7 +30,7 @@ def details_movie(request, pk):
                 'movie_pk': pk,
             }
         ),
-        'avg_rating': f'{(sum(e.rate for e in movie.rating_set.all()) / rating_count):.1f} / 5.0',
+        'avg_rating': f'{movie.get_average_rating:.1f} / 5.0',
         'rating_count': movie.rating_set.count(),
     }
     return render(request, 'movies/details_movie.html', context)
@@ -98,4 +94,25 @@ def delete_movie(request, pk):
 
 
 def search_movie(request):
-    return render(request, 'movies/search.html')
+    movies = Movie.objects.all()
+
+    if request.method == 'POST':
+        title_value = request.POST['title']
+        category_value = request.POST['category']
+        actors_value = request.POST['actors']
+
+        movies_with_searched_title = Movie.objects.filter(movie_title__icontains=title_value)
+        movies_with_searched_category = Movie.objects.filter(category__icontains=category_value)
+        movies_with_searched_actors = Movie.objects.filter(actors__icontains=actors_value)
+
+        movies = list(movies_with_searched_title & movies_with_searched_category & movies_with_searched_actors)
+
+    context = {
+        'movies': movies,
+    }
+    return render(request, 'movies/search.html', context)
+
+
+
+
+

@@ -36,3 +36,18 @@ class RateMovieForm(forms.ModelForm):
             rating.save()
 
         return rating
+
+
+# class SearchForm(forms.Form):
+#     title = forms.CharField(
+#         max_length=20,
+#     )
+#     category = forms.CharField(
+#         max_length=20,
+#     )
+#     actors = forms.CharField(
+#         max_length=20,
+#     )
+#     year = forms.IntegerField()
+#     rating = forms.IntegerField()
+#
