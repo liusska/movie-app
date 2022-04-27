@@ -9,6 +9,9 @@ from movie_app.movies.models import Movie
 
 
 def profile_details(request):
+    """
+    This FBV sent to the template the information about current user activity.
+    """
     user = User.objects.get(username=request.user)
     movies = Movie.objects.filter(user_id=request.user.id)
     context = {
@@ -20,6 +23,9 @@ def profile_details(request):
 
 
 class UserRegisterView(CreateView):
+    """
+    This CBV creates new user, with automatic login after successful registration.
+    """
     form_class = RegistrationForm
     template_name = 'accounts/register.html'
     success_url = reverse_lazy('index')
@@ -31,6 +37,9 @@ class UserRegisterView(CreateView):
 
 
 class UserLoginView(LoginView):
+    """
+    Using built-in LoginView, this CBV responds for login user.
+    """
     template_name = 'accounts/login.html'
 
     def get_success_url(self):

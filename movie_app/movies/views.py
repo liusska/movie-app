@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.views.generic import ListView
+from django.contrib.auth.decorators import login_required
 from .models import Movie
 from .forms import CreateMovieForm, EditMovieForm, RateMovieForm
 
@@ -13,11 +14,21 @@ class MovieGalleryView(ListView):
         ordering = self.request.GET.get('ordering', '-publication_date')
         return ordering
 
-
+@login_required
 def details_movie(request, pk):
+    """
+    This FBV sent to the template all information about selected movie and his creator.
+    """
+
+    # get the movie by given pk
     movie = Movie.objects.get(pk=pk)
+
+    # get the characters after '=' sign from trailer url
     trailer_id = movie.trailer.split('/')[-1].split('=')[-1]
+
     is_owner = movie.user == request.user
+
+    # check if current user already rated the current movie
     is_rated_by_user = movie.rating_set.filter(user_id=request.user.id).exists()
 
     context = {
@@ -36,7 +47,11 @@ def details_movie(request, pk):
     return render(request, 'movies/details_movie.html', context)
 
 
+@login_required
 def rate_movie(request, pk):
+    """
+    This FBV add user to the current rating
+    """
     form = RateMovieForm(request.POST)
 
     if form.is_valid():
@@ -47,7 +62,11 @@ def rate_movie(request, pk):
     return redirect('details movie', pk)
 
 
+@login_required
 def create_movie(request):
+    """
+    This FBV create new movie.
+    """
     if request.method == 'POST':
         form = CreateMovieForm(request.POST)
         if form.is_valid():
@@ -64,7 +83,11 @@ def create_movie(request):
     return render(request, 'movies/create_movie.html', context)
 
 
+@login_required
 def edit_movie(request, pk):
+    """
+    This FBV edit the current movie, only if the current user is owner of the movie.
+    """
     movie = Movie.objects.get(pk=pk)
     if request.method == 'POST':
         form = EditMovieForm(request.POST, instance=movie)
@@ -81,7 +104,11 @@ def edit_movie(request, pk):
     return render(request, 'movies/edit_movie.html', context)
 
 
+@login_required
 def delete_movie(request, pk):
+    """
+    This FBV delete the current movie, only if the current user is owner of the movie.
+    """
     movie = Movie.objects.get(pk=pk)
     if request.method == 'POST':
         movie.delete()
@@ -94,6 +121,14 @@ def delete_movie(request, pk):
 
 
 def search_movie(request):
+    """
+    Get the value from the searched fields, if the method is POST and return the results or message.
+    The searched fields are :
+        - movie title
+        - movie category
+        - movie actors
+    If the method is GET just show list ot all movies.
+    """
     movies = Movie.objects.all()
 
     if request.method == 'POST':
