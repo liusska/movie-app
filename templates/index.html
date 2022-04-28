@@ -10,7 +10,11 @@
         <img src="{% static 'img/home.jpg' %}" alt="">
         <div class="index-message">
             <h1>Hello, {{ request.user }}</h1>
-            <p>Nice to see you!</p>
+            {% if request.user.is_authenticated %}
+                <p>Nice to see you!</p>
+            {% else %}
+                <p class="register-or-login-msg">Please register or login!</p>
+            {% endif %}
         </div>
 
     </section>

@@ -93,11 +93,10 @@ class Movie(models.Model):
 
     @property
     def get_average_rating(self):
-        if self.rating_set.count() == 0:
-            rating_count = 1
-        else:
-            rating_count = self.rating_set.count()
-        return sum(e.rate for e in self.rating_set.all()) / rating_count
+        rate_count = self.rating_set.count()
+        if rate_count == 0:
+            return 0
+        return sum(e.rate for e in self.rating_set.all()) / rate_count
 
     def __str__(self):
         return f'{self.movie_title} ({self.year})'

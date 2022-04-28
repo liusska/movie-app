@@ -14,6 +14,7 @@ class MovieGalleryView(ListView):
         ordering = self.request.GET.get('ordering', '-publication_date')
         return ordering
 
+
 @login_required
 def details_movie(request, pk):
     """
@@ -140,7 +141,7 @@ def search_movie(request):
         movies_with_searched_category = Movie.objects.filter(category__icontains=category_value)
         movies_with_searched_actors = Movie.objects.filter(actors__icontains=actors_value)
 
-        movies = list(movies_with_searched_title & movies_with_searched_category & movies_with_searched_actors)
+        movies = movies_with_searched_title & movies_with_searched_category & movies_with_searched_actors
 
     context = {
         'movies': movies,

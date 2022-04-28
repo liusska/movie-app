@@ -26,6 +26,13 @@
 .movies-table a{
     text-decoration: none;
     color: #f5c518;
+    border: 1px solid #f5c518;
+    border-radius: 4px;
+    padding: 2px 4px;
+}
+
+.movies-table a:hover{
+    font-weight: bold;
 }
 
 .movies-table th{
