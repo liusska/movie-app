@@ -1,13 +1,13 @@
 from pathlib import Path
+from decouple import config
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure--8)^2qf#7y$#ntj-4opofph39nj4yi(9dx%&=g0r^=ct@oe_k#'
+SECRET_KEY = config('SECRET_KEY')
 
-DEBUG = True
+DEBUG = config('DEBUG')
 
 ALLOWED_HOSTS = []
-
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -55,10 +55,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'movies_db',
-        'USER': 'postgres',
-        'PASSWORD': '123456',
+        'USER': config('DB_USER'),
+        'PASSWORD': config('DB_PASSWORD'),
         'HOST': '127.0.0.1',
-        'PORT': '5432',
+        'PORT': config('DB_PORT'),
     }
 }
 
