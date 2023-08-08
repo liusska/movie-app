@@ -1,4 +1,4 @@
-{% load static %}
+{% load static i18n %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -14,18 +14,18 @@
 <body>
 <nav class="nav-bar">
     <div>
-        <a href="{% url 'index' %}">Home</a>
-        <a href="{% url 'movies gallery' %}">Movies</a>
-        <a href="{% url 'search movie' %}">Search</a>
+        <a href="{% url 'index' %}">{% trans "Home" %} </a>
+        <a href="{% url 'movies gallery' %}">{% trans "Movies" %}</a>
+        <a href="{% url 'search movie' %}">{% trans "Search" %}</a>
     </div>
     <div>
         {% if not request.user.is_authenticated %}
-            <a href="{% url 'register' %}">Register</a>
-            <a href="{% url 'login' %}">Login</a>
+            <a href="{% url 'register' %}">{% trans "Register" %}</a>
+            <a href="{% url 'login' %}">{% trans "Login" %}</a>
         {% else %}
-            <a href="{% url 'create movie' %}">Add Movie</a>
-            <a href="{% url 'profile' %}">Profile</a>
-            <a href="{% url 'logout' %}">Logout</a>
+            <a href="{% url 'create movie' %}">{% trans "Add Movie" %}</a>
+            <a href="{% url 'profile' %}">{% trans "Profile" %}</a>
+            <a href="{% url 'logout' %}">{% trans "Logout" %}</a>
         {% endif %}
     </div>
 </nav>
